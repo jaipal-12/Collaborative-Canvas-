@@ -10,7 +10,9 @@ export class WebSocketClient {
 
   connect() {
     return new Promise((resolve, reject) => {
-      this.socket = io();
+      // Use window.SERVER_URL if set (for production), otherwise use same origin
+      const serverUrl = window.SERVER_URL || window.location.origin;
+      this.socket = io(serverUrl);
 
       this.socket.on('connect', () => {
         console.log('Connected to server');

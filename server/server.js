@@ -10,10 +10,19 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
+
+// CORS configuration - allow specific origins in production
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : ['*']; // Default to allow all in development
+
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
+    origin: allowedOrigins.length === 1 && allowedOrigins[0] === '*' 
+      ? '*' 
+      : allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 

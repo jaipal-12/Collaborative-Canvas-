@@ -84,6 +84,11 @@
     </div>
   </div>
 
+  <!-- Server URL configuration (set via environment variable in production) -->
+  <script>
+    // For cross-origin deployments, set this before loading main.js
+    // window.SERVER_URL = 'https://your-server-url.com';
+  </script>
   <script src="/socket.io/socket.io.js"></script>
   <script type="module" src="main.js"></script>
 </body>
