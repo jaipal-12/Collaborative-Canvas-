@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collaborative Canvas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="login-screen" class="screen active">
+      <div class="login-container">
+        <h1>Collaborative Canvas</h1>
+        <p>Real-time drawing with friends</p>
+        <input type="text" id="username-input" placeholder="Enter your name" maxlength="20">
+        <input type="text" id="room-input" placeholder="Room ID " maxlength="20">
+        <button id="join-btn">Join Room</button>
+      </div>
+    </div>
+
+    <div id="canvas-screen" class="screen">
+      <header>
+        <div class="header-left">
+          <h2>Collaborative Canvas</h2>
+          <span id="room-id"></span>
+        </div>
+        <div id="users-list"></div>
+      </header>
+
+      <div class="toolbar">
+        <div class="tool-group">
+          <button id="tool-brush" class="tool-btn active" title="Brush">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            </svg>
+          </button>
+          <button id="tool-eraser" class="tool-btn" title="Eraser">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 20H7L3 16L12 7L21 16V20Z"/>
+              <path d="M16 20L20 16"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="tool-group">
+          <label>Color:</label>
+          <input type="color" id="color-picker" value="#000000">
+        </div>
+
+        <div class="tool-group">
+          <label>Size:</label>
+          <input type="range" id="size-slider" min="1" max="50" value="5">
+          <span id="size-value">5</span>
+        </div>
+
+        <div class="tool-group">
+          <button id="undo-btn" class="action-btn" title="Undo (Ctrl+Z)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7v6h6"/>
+              <path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"/>
+            </svg>
+          </button>
+          <button id="redo-btn" class="action-btn" title="Redo (Ctrl+Y)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 7v6h-6"/>
+              <path d="M3 17a9 9 0 019-9 9 9 0 016 2.3l3 2.7"/>
+            </svg>
+          </button>
+          <button id="clear-btn" class="action-btn" title="Clear Canvas">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="canvas-container">
+        <canvas id="main-canvas"></canvas>
+        <canvas id="drawing-canvas"></canvas>
+        <canvas id="cursor-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
